@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo</title>
+</head>
+<body>
+    
+    <button onclick="sortear()">Sortear Número</button>
+    <script>
+        var numerosSorteados = []
+        var cartela = []
+        exibirCartela()
+        function sortear (){
+            let numero = Math.floor(Math.random()* 75) 
+            if(numero == 0){
+                sortear()
+            }
+            if(numeroRepetido(numero)){
+                numerosSorteados.push(numero)
+                mostrarTela(numero)
+            }
+        }
+        function numeroRepetido(num){
+            if(numerosSorteados.length == 0){
+                return true
+            }
+            var saida = true;
+            for(var i = 0 ; i < numerosSorteados.length; i++)
+            {
+                //alert(num + " " +numerosSorteados[i])
+                if(numerosSorteados[i] == num)
+                {
+                    var saida =  false
+                }
+            }
+            if(saida){
+                return true
+            }else{
+                // se saida for false significa que o numero é igual
+                return false
+            }
+        }
+
+        function mostrarTela(numero)
+        {
+            const exibicao = document.createElement("p")
+            exibicao.innerText = numero
+            document.body.appendChild(exibicao)
+        }
+
+        function gerarUmaCartela(){
+            for(var i = 0; i <5 ; i++){
+                cartela.push(Math.floor(Math.random()*75))
+            }
+        }
+        function exibirCartela(){
+            gerarUmaCartela()
+            var texto = ""
+            for(var i = 0; i <5 ; i++){
+                texto = texto + cartela[i]+"  "
+            }
+            const exibicao = document.createElement("p")
+            exibicao.innerText = texto
+            document.body.appendChild(exibicao)
+        }
+    </script>
+</body>
+</html>
